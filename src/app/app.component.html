@@ -1,0 +1,164 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid bg">
+    <!-- <a class="navbar-brand">Navbar</a> -->
+    <img
+      src="https://thumbs.dreamstime.com/b/demo-demo-icon-139882881.jpg"
+      width="50px"
+      height="50px"
+    />
+    <header><b>Demo CRUD Operation</b></header>
+
+    <form class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+      />
+      <!-- <button
+        class="btn btn-outline-success"
+        type="submit"
+        (click)="onSearch()"
+      >
+        Search
+      </button>
+      <button class="btn btn-outline-danger ms-2" type="submit">
+        Clear Search
+      </button> -->
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="body">
+            <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
+              <!--  -->
+              <div class="col">
+                <label class="form-label">Std Name</label>
+                <input
+                  required
+                  name="stdName"
+                  [(ngModel)]="stdName"
+                  type="text"
+                  class="form-control"
+                />
+                <div
+                  *ngIf="
+                    demoForm.controls['stdName'].invalid &&
+                    (demoForm.controls['stdName'].dirty ||
+                      demoForm.controls['stdName'].touched)
+                  "
+                >
+                  <div
+                    class="err-color"
+                    *ngIf="demoForm.controls['stdName'].errors.required"
+                  >
+                    Std Name is required.
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+
+              <!--  -->
+              <div class="col">
+                <label class="form-label">Std No</label>
+                <input
+                  required
+                  name="stdNo"
+                  [(ngModel)]="stdNo"
+                  type="text"
+                  class="form-control"
+                />
+                <div
+                  *ngIf="
+                    demoForm.controls['stdNo'].invalid &&
+                    (demoForm.controls['stdNo'].dirty ||
+                      demoForm.controls['stdNo'].touched)
+                  "
+                >
+                  <div
+                    class="err-color"
+                    *ngIf="demoForm.controls['stdNo'].errors.required"
+                  >
+                    Std No is required.
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+
+              <!--  -->
+              <div class="col">
+                <label class="form-label">Phone No</label>
+                <input
+                  name="phoneNo"
+                  [(ngModel)]="phoneNo"
+                  type="number"
+                  class="form-control"
+                  required
+                />
+                <div
+                  *ngIf="
+                    demoForm.controls['phoneNo'].invalid &&
+                    (demoForm.controls['phoneNo'].dirty ||
+                      demoForm.controls['phoneNo'].touched)
+                  "
+                >
+                  <div
+                    class="err-color"
+                    *ngIf="demoForm.controls['phoneNo'].errors.required"
+                  >
+                    Phone No is required.
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+              <div class="button-style">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!demoForm.valid"
+                >
+                  Submit
+                </button>
+                <!-- <button class="btn btn-primary" (click)="onSubmit()">
+                  Add
+                </button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Form end -->
+
+      <!-- Table start -->
+      <div class="col-md-6">
+        <div class="card">
+          <table class="table table-bordered table-responsive">
+            <th>Std Name</th>
+            <th>Std No</th>
+            <th>Phone No</th>
+            <th>Actions</th>
+            <tbody>
+              <tr *ngFor="let a of demoData | search: searchTerm">
+                <td>{{ a.stdName }}</td>
+                <td>{{ a.stdNo }}</td>
+                <td>{{ a.phoneNo }}</td>
+                <td>
+                  <button (click)="onDelete(a.id)" class="btn btn-danger">
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
